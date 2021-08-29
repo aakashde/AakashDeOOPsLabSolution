@@ -1,0 +1,49 @@
+package com.aakash.service;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import com.aakash.model.Employee;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		
+		BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
+		
+		Employee employee = new Employee ("Aakash","De");
+		
+		
+		System.out.println("Please enter the department : \n1.Technical\n2.Admin\n3.Human Resource\n4.Legal");
+		Integer choiece=Integer.parseInt(br.readLine());
+		String department = getDepartmentName(choiece);
+		
+		CredentialService credentialservice = new CredentialService();
+		
+		credentialservice.generateEmailAddress(employee.getFirstName(), employee.getLastName(), department);
+		credentialservice.generatePassword();
+		
+		System.out.println("Dear "+employee.firstName+" your generated crediantials is as follows");
+		credentialservice.showCredentials();		
+		
+
+	}
+	public static String getDepartmentName(int selection)
+	{
+		String department="";
+		if(selection==1)
+			department = "tech";
+		else if(selection == 2)
+			department = "admin";
+		else if(selection == 3)
+			department = "hr";
+		else if(selection == 4)
+			department = "legal";
+		
+		return department;
+	}
+
+	
+
+}
